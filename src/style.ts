@@ -1,48 +1,44 @@
+export function createStyle() {
+  const style = document.createElement("style");
+  style.textContent = `
+
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
+nutjar-ui {
+  --nutjar-modal-background: blue;
+}
+
 #nutjar--action-open {
-  --primary-color: #6b21a8;
   padding: 0.6em 1em 0.6em 1em;
-  display: flex;
+  font-size: var(--nutjar-button-size, 1em);
   flex-direction: row;
-  gap: 0.5em;
-  background: var(--primary-color);
-  align-items: center;
+  background: var(--nutjar-button-background, #6b21a8);
   border-radius: 0.3em;
-  color: white;
+  color: var(--nutjar-button-text, #fafafa);
   border: none;
 }
 
 #nutjar--action-open:hover {
-  background: #9333ea;
+  background: var(--nutjar-button-hover, #9333ea);
   cursor: pointer;
-}
-
-#nutjar--action-open--icon {
-  display: block;
-  height: 1em;
-  width: 1em;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'%3E%3Cpath d='M296 160H180.6l42.6-129.8C227.2 15 215.7 0 200 0H56C44 0 33.8 8.9 32.2 20.8l-32 240C-1.7 275.2 9.5 288 24 288h118.7L96.6 482.5c-3.6 15.2 8 29.5 23.3 29.5 8.4 0 16.4-4.4 20.8-12l176-304c9.3-15.9-2.2-36-20.7-36z'/%3E%3C/svg%3E");
-  background-size: contain;
-  background-repeat: no-repeat;
 }
 
 #nutjar--modal-container {
   border-radius: 0.3em;
   border: none;
-  background-color: #262626;
+  background-color: var(--nutjar-modal-background, #262626);
   box-shadow:
     0 20px 25px -5px rgb(0 0 0 / 0.1),
     0 8px 10px -6px rgb(0 0 0 / 0.1);
-  color: #fafafa;
+  color: var(--nutjar-modal-text, #fafafa);
   font-family: "Inter", sans-serif;
 }
 
 #nutjar--modal-container input {
   padding: 1em;
   font-family: "Inter";
-  color: white;
-  background-color: #171717;
+  color: var(--nutjar-modal-input-text, #fafafa);
+  background-color: var(--nutjar-modal-input-background, #171717);
   border: none;
   outline: none;
   border-radius: 0.3em;
@@ -52,10 +48,11 @@
 #nutjar--modal-input-container {
   display: flex;
   flex-direction: row;
+  color: var(--nutjar-modal-input-text, #fafafa);
   gap: 1em;
   align-items: center;
   padding-right: 1em;
-  background-color: #171717;
+  background-color: var(--nutjar-modal-input-background, #171717);
 }
 
 #nutjar--modal-container h2 {
@@ -75,7 +72,7 @@
 }
 
 #nutjar--modal-button {
-  background-color: #171717;
+  background-color: var(--nutjar-modal-button-background, #171717);
   font-family: "Inter";
   font-weight: bold;
   border: none;
@@ -86,7 +83,7 @@
 }
 
 #nutjar--modal-button:hover {
-  background-color: #404040;
+  background-color: var(--nutjar-modal-button-hover, #404040);
   transition: 200ms;
 }
 
@@ -102,13 +99,13 @@
 #nutjar--modal-invoice-container > button {
   border: none;
   padding: 0.6em 1em 0.6em 1em;
-  background-color: #171717;
+  background-color: var(--nutjar-modal-button-background, #171717);
   color: white;
   cursor: pointer;
 }
 
 #nutjar--modal-invoice-container > button:hover {
-  background-color: #404040;
+  background-color: var(--nutjar-modal-button-hover, #404040);
 }
 
 #nutjar--modal-invoice-success-box {
@@ -116,4 +113,8 @@
   position: absolute;
   z-index: 100;
   background-color: rgba(255, 255, 255, 0.8);
+}
+ `;
+
+  return style;
 }

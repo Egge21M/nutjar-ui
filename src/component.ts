@@ -1,20 +1,9 @@
 import { Nutjar, NutZapTransport } from "nutjar.js";
 import QRCode from "qrcode";
-import "./style.css";
-import { createElement, extractNostrSettings } from "./utils";
+import { createElement, extractSettings } from "./utils";
+import { createStyle } from "./style";
 
-const scriptEl = document.querySelector(
-  'script[data-name="nutjar-button"]',
-) as HTMLScriptElement;
-const nostrSettings = extractNostrSettings(scriptEl);
-
-const jar = new Nutjar(
-  "https://mint.minibits.cash/Bitcoin",
-  nostrSettings.npub,
-  new NutZapTransport(nostrSettings.relays),
-);
-
-function createModal(): HTMLDialogElement {
+function createModal(jar: Nutjar): HTMLDialogElement {
   const modalContainer = createElement("dialog", {
     id: "nutjar--modal-container",
   }) as HTMLDialogElement;
@@ -25,6 +14,7 @@ function createModal(): HTMLDialogElement {
   const modalInvoiceButton = createInvoiceButton(
     modalContainer,
     modalInputContainer,
+    jar,
   );
 
   modalInner.append(modalHeading, modalInputContainer, modalInvoiceButton);
@@ -52,6 +42,7 @@ function createInputContainer(): HTMLElement {
 function createInvoiceButton(
   modalContainer: HTMLDialogElement,
   modalInputContainer: HTMLElement,
+  jar: Nutjar,
 ): HTMLButtonElement {
   const button = createElement("button", {
     id: "nutjar--modal-button",
@@ -132,15 +123,23 @@ function createDonationButton(modalContainer: HTMLDialogElement): HTMLElement {
   return button;
 }
 
-function init() {
-  const modalContainer = createModal();
-  const donationButton = createDonationButton(modalContainer);
+class NutjarButton extends HTMLElement {
+  constructor() {
+    super();
+    const shadow = this.attachShadow({ mode: "open" });
 
-  document.body.appendChild(modalContainer);
+    const { relays, npub, mint } = extractSettings(this);
 
-  if (scriptEl?.parentNode) {
-    scriptEl.parentNode.replaceChild(donationButton, scriptEl);
+    const jar = new Nutjar(mint, npub, new NutZapTransport(relays));
+
+    const modalContainer = createModal(jar);
+    const donationButton = createDonationButton(modalContainer);
+    shadow.appendChild(modalContainer);
+    shadow.appendChild(donationButton);
+
+    const style = createStyle();
+    shadow.appendChild(style);
   }
 }
 
-init();
+customElements.define("nutjar-button", NutjarButton);

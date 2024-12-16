@@ -5,7 +5,7 @@ const config = defineConfig({
   plugins: cssInjectedByJsPlugin(),
   build: {
     lib: {
-      entry: "./src/main.ts",
+      entry: "./src/component.ts",
       formats: ["iife"],
       name: "nutjar",
     },

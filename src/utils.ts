@@ -6,13 +6,18 @@ type elementOptions = {
   text?: string;
 };
 
-type NostrSettings = {
+type Settings = {
   relays: string[];
   npub: `npub1${string}`;
+  mint: string;
 };
 
-export function extractNostrSettings(el: HTMLElement): NostrSettings {
-  const nprofile = el.getAttribute("data-nprofile") as `nprofile1${string}`;
+export function extractSettings(el: HTMLElement): Settings {
+  const mint = el.getAttribute("mint");
+  if (!mint) {
+    throw new Error("nutjar - must define a mint");
+  }
+  const nprofile = el.getAttribute("nprofile") as `nprofile1${string}`;
   if (nprofile) {
     const { data } = decode(nprofile);
     if (!data.relays || data.relays.length < 1) {
@@ -20,14 +25,14 @@ export function extractNostrSettings(el: HTMLElement): NostrSettings {
         "nutjar - provided nprofile does not contain relay hints",
       );
     }
-    return { relays: data.relays, npub: npubEncode(data.pubkey) };
+    return { relays: data.relays, npub: npubEncode(data.pubkey), mint };
   }
-  const npub = el.getAttribute("data-npub") as `npub1${string}`;
-  const relays = el.getAttribute("data-relays")?.split(",");
+  const npub = el.getAttribute("npub") as `npub1${string}`;
+  const relays = el.getAttribute("relays")?.split(",");
   if (!npub || !relays) {
     throw new Error("nutjar - no pubkey or relays provided");
   }
-  return { relays, npub };
+  return { relays, npub, mint };
 }
 
 export function createElement(

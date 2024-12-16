@@ -2,19 +2,25 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
+    <script type="module" src="./src/component  .ts"></script>
+    <title>NutJar Demo</title>
   </head>
   <body>
-    <div id="app">
-      <script
-        type="module"
-        src="/src/main.ts"
-        data-name="nutjar-button"
-        data-npub="npub1mhcr4j594hsrnen594d7700n2t03n8gdx83zhxzculk6sh9nhwlq7uc226"
-        data-relays="wss://nostr.mom,wss://relay.damus.io"
-      ></script>
-    </div>
+    <h1>This is a demo</h1>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
+      est laborum.
+    </p>
+    <nutjar-button
+      npub="npub1mhcr4j594hsrnen594d7700n2t03n8gdx83zhxzculk6sh9nhwlq7uc226"
+      relays="wss://nostr.mom,wss://relay.damus.io"
+      mint="https://mint.minibits.cash/Bitcoin"
+    ></nutjar-button>
   </body>
 </html>
