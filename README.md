@@ -2,6 +2,9 @@
 
 nutjar-ui allows you to easily integrate Lightning tips on your website, utilizing nostr and Cashu. It is a batteries-included Web Component, that does the heavy lifting for you. If you are looking to build your own UI around the nutjar logic, take a look at [nutjar.js](https://github.com/Egge21M/nutjar).
 
+> [!WARNING]  
+> nutjar-ui is in active development!! Proceed carefully and at your own risk
+
 ## Getting started
 
 In order to use the custom Web Component in your HTML you have to load it first.
