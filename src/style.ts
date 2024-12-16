@@ -4,9 +4,6 @@ export function createStyle() {
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
-nutjar-ui {
-  --nutjar-modal-background: blue;
-}
 
 #nutjar--action-open {
   padding: 0.6em 1em 0.6em 1em;
@@ -16,44 +13,81 @@ nutjar-ui {
   border-radius: 0.3em;
   color: var(--nutjar-button-text, #fafafa);
   border: none;
+  cursor: pointer;
 }
+
+.nutjar-theme-light#nutjar--action-open {
+  background: var(--nutjar-button-background, #fafafa);
+  color: var(--nutjar-button-text, #171717);
+}
+
+.nutjar-theme-dark#nutjar--action-open {
+  background: var(--nutjar-button-background, #6b21a8);
+  color: var(--nutjar-button-text, #fafafa);
+}
+
 
 #nutjar--action-open:hover {
   background: var(--nutjar-button-hover, #9333ea);
-  cursor: pointer;
 }
 
 #nutjar--modal-container {
   border-radius: 0.3em;
   border: none;
-  background-color: var(--nutjar-modal-background, #262626);
   box-shadow:
     0 20px 25px -5px rgb(0 0 0 / 0.1),
     0 8px 10px -6px rgb(0 0 0 / 0.1);
-  color: var(--nutjar-modal-text, #fafafa);
   font-family: "Inter", sans-serif;
+}
+
+#nutjar--modal-container.nutjar-theme-light {
+  background-color: var(--nutjar-modal-background, #fafafa);
+  color: var(--nutjar-modal-text, #171717);
+}
+
+#nutjar--modal-container.nutjar-theme-dark {
+  background-color: var(--nutjar-modal-background, #262626);
+  color: var(--nutjar-modal-text, #fafafa);
 }
 
 #nutjar--modal-container input {
   padding: 1em;
   font-family: "Inter";
-  color: var(--nutjar-modal-input-text, #fafafa);
-  background-color: var(--nutjar-modal-input-background, #171717);
   border: none;
   outline: none;
   border-radius: 0.3em;
   margin: none;
 }
 
+#nutjar--modal-container.nutjar-theme-light input {
+  color: var(--nutjar-modal-input-text, #171717);
+  background-color: var(--nutjar-modal-input-background, #e5e5e5);
+}
+
+#nutjar--modal-container.nutjar-theme-dark input {
+  color: var(--nutjar-modal-input-text, #fafafa);
+  background-color: var(--nutjar-modal-input-background, #171717);
+}
+
 #nutjar--modal-input-container {
   display: flex;
   flex-direction: row;
-  color: var(--nutjar-modal-input-text, #fafafa);
   gap: 1em;
   align-items: center;
   padding-right: 1em;
+}
+
+#nutjar--modal-input-container.nutjar-theme-dark {
+  color: var(--nutjar-modal-input-text, #fafafa);
   background-color: var(--nutjar-modal-input-background, #171717);
 }
+
+
+#nutjar--modal-input-container.nutjar-theme-light {
+  color: var(--nutjar-modal-input-text, #171717);
+  background-color: var(--nutjar-modal-input-background, #e5e5e5);
+}
+
 
 #nutjar--modal-container h2 {
   margin: 0;
@@ -72,17 +106,30 @@ nutjar-ui {
 }
 
 #nutjar--modal-button {
-  background-color: var(--nutjar-modal-button-background, #171717);
   font-family: "Inter";
   font-weight: bold;
   border: none;
-  color: white;
   padding: 0.6em 1em 0.6em 1em;
   border-radius: 0.3em;
   cursor: pointer;
 }
 
-#nutjar--modal-button:hover {
+#nutjar--modal-button.nutjar-theme-light {
+  color: var(--nutjar-modal-input-text, #171717);
+  background-color: var(--nutjar-modal-input-background, #e5e5e5);
+}
+
+#nutjar--modal-button.nutjar-theme-dark {
+  color: var(--nutjar-modal-input-text, #fafafa);
+  background-color: var(--nutjar-modal-input-background, #171717);
+}
+
+#nutjar--modal-button.nutjar-theme-light:hover {
+  background-color: var(--nutjar-modal-button-hover, #a3a3a3);
+  transition: 200ms;
+}
+
+#nutjar--modal-button.nutjar-theme-dark:hover {
   background-color: var(--nutjar-modal-button-hover, #404040);
   transition: 200ms;
 }

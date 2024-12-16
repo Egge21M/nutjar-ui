@@ -38,8 +38,10 @@ export function extractSettings(el: HTMLElement): Settings {
 export function createElement(
   tag: string,
   { id, classList, text }: elementOptions = {},
+  theme: "dark" | "light" = "dark",
 ) {
   const el = document.createElement(tag);
+  el.classList.add(`nutjar-theme-${theme}`);
   if (id) el.id = id;
   if (classList) el.classList.add(...classList);
   if (text) el.innerText = text;

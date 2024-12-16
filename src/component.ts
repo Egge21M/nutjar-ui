@@ -3,18 +3,23 @@ import QRCode from "qrcode";
 import { createElement, extractSettings } from "./utils";
 import { createStyle } from "./style";
 
-function createModal(jar: Nutjar): HTMLDialogElement {
-  const modalContainer = createElement("dialog", {
-    id: "nutjar--modal-container",
-  }) as HTMLDialogElement;
+function createModal(jar: Nutjar, theme: "dark" | "light"): HTMLDialogElement {
+  const modalContainer = createElement(
+    "dialog",
+    {
+      id: "nutjar--modal-container",
+    },
+    theme,
+  ) as HTMLDialogElement;
 
-  const modalInner = createElement("div", { id: "nutjar--modal-inner" });
-  const modalHeading = createElement("h2", { text: "Send a Zap" });
-  const modalInputContainer = createInputContainer();
+  const modalInner = createElement("div", { id: "nutjar--modal-inner" }, theme);
+  const modalHeading = createElement("h2", { text: "Send a Zap" }, theme);
+  const modalInputContainer = createInputContainer(theme);
   const modalInvoiceButton = createInvoiceButton(
     modalContainer,
     modalInputContainer,
     jar,
+    theme,
   );
 
   modalInner.append(modalHeading, modalInputContainer, modalInvoiceButton);
@@ -23,17 +28,25 @@ function createModal(jar: Nutjar): HTMLDialogElement {
   return modalContainer;
 }
 
-function createInputContainer(): HTMLElement {
-  const container = createElement("div", {
-    id: "nutjar--modal-input-container",
-  });
-  const input = createElement("input", {
-    id: "nutjar--modal-input",
-  }) as HTMLInputElement;
+function createInputContainer(theme: "dark" | "light"): HTMLElement {
+  const container = createElement(
+    "div",
+    {
+      id: "nutjar--modal-input-container",
+    },
+    theme,
+  );
+  const input = createElement(
+    "input",
+    {
+      id: "nutjar--modal-input",
+    },
+    theme,
+  ) as HTMLInputElement;
   input.type = "number";
   input.placeholder = "Enter amount...";
 
-  const unit = createElement("span", { text: "SATS" });
+  const unit = createElement("span", { text: "SATS" }, theme);
   container.append(input, unit);
 
   return container;
@@ -43,16 +56,25 @@ function createInvoiceButton(
   modalContainer: HTMLDialogElement,
   modalInputContainer: HTMLElement,
   jar: Nutjar,
+  theme: "dark" | "light",
 ): HTMLButtonElement {
-  const button = createElement("button", {
-    id: "nutjar--modal-button",
-    text: "Request Invoice",
-  }) as HTMLButtonElement;
+  const button = createElement(
+    "button",
+    {
+      id: "nutjar--modal-button",
+      text: "Request Invoice",
+    },
+    theme,
+  ) as HTMLButtonElement;
 
-  const invoiceContainer = createInvoiceContainer();
-  const successMessage = createElement("div", {
-    id: "nutjar--modal-invoice-success-box",
-  });
+  const invoiceContainer = createInvoiceContainer(theme);
+  const successMessage = createElement(
+    "div",
+    {
+      id: "nutjar--modal-invoice-success-box",
+    },
+    theme,
+  );
   successMessage.appendChild(
     createElement("p", { text: "Payment successful" }),
   );
@@ -102,20 +124,31 @@ function createInvoiceButton(
   return button;
 }
 
-function createInvoiceContainer(): HTMLElement {
-  const container = createElement("div", {
-    id: "nutjar--modal-invoice-container",
-  });
+function createInvoiceContainer(theme: "dark" | "light"): HTMLElement {
+  const container = createElement(
+    "div",
+    {
+      id: "nutjar--modal-invoice-container",
+    },
+    theme,
+  );
   const canvas = document.createElement("canvas");
-  const copyButton = createElement("button", { text: "Copy Invoice" });
+  const copyButton = createElement("button", { text: "Copy Invoice" }, theme);
 
   container.append(canvas, copyButton);
   return container;
 }
 
-function createDonationButton(modalContainer: HTMLDialogElement): HTMLElement {
-  const button = createElement("button", { id: "nutjar--action-open" });
-  const text = createElement("span", { id: "testid", text: "Send Nut Zap" });
+function createDonationButton(
+  modalContainer: HTMLDialogElement,
+  theme: "dark" | "light",
+): HTMLElement {
+  const button = createElement("button", { id: "nutjar--action-open" }, theme);
+  const text = createElement(
+    "span",
+    { id: "testid", text: "Send Nut Zap" },
+    theme,
+  );
 
   button.append(text);
   button.addEventListener("click", () => modalContainer.showModal());
@@ -129,11 +162,12 @@ class NutjarButton extends HTMLElement {
     const shadow = this.attachShadow({ mode: "open" });
 
     const { relays, npub, mint } = extractSettings(this);
+    const theme = (this.getAttribute("theme") as "light" | "dark") || "light";
 
     const jar = new Nutjar(mint, npub, new NutZapTransport(relays));
 
-    const modalContainer = createModal(jar);
-    const donationButton = createDonationButton(modalContainer);
+    const modalContainer = createModal(jar, theme);
+    const donationButton = createDonationButton(modalContainer, theme);
     shadow.appendChild(modalContainer);
     shadow.appendChild(donationButton);
 
