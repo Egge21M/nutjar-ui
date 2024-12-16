@@ -12,6 +12,12 @@ function createModal(jar: Nutjar, theme: "dark" | "light"): HTMLDialogElement {
     theme,
   ) as HTMLDialogElement;
 
+  modalContainer.addEventListener("click", (e) => {
+    if (e.target === modalContainer) {
+      modalContainer.close();
+    }
+  });
+
   const modalInner = createElement("div", { id: "nutjar--modal-inner" }, theme);
   const modalHeading = createElement("h2", { text: "Send a Zap" }, theme);
   const modalInputContainer = createInputContainer(theme);

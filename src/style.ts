@@ -16,16 +16,6 @@ export function createStyle() {
   cursor: pointer;
 }
 
-.nutjar-theme-light#nutjar--action-open {
-  background: var(--nutjar-button-background, #fafafa);
-  color: var(--nutjar-button-text, #171717);
-}
-
-.nutjar-theme-dark#nutjar--action-open {
-  background: var(--nutjar-button-background, #6b21a8);
-  color: var(--nutjar-button-text, #fafafa);
-}
-
 
 #nutjar--action-open:hover {
   background: var(--nutjar-button-hover, #9333ea);
@@ -38,6 +28,7 @@ export function createStyle() {
     0 20px 25px -5px rgb(0 0 0 / 0.1),
     0 8px 10px -6px rgb(0 0 0 / 0.1);
   font-family: "Inter", sans-serif;
+  padding: 0px;
 }
 
 #nutjar--modal-container.nutjar-theme-light {
@@ -102,7 +93,7 @@ export function createStyle() {
   flex-direction: column;
   align-items: center;
   gap: 1em;
-  padding: 0.5em;
+  padding: 1em;
 }
 
 #nutjar--modal-button {
