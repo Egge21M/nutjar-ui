@@ -10,15 +10,18 @@ nutjar-ui allows you to easily integrate Lightning tips on your website, utilizi
 In order to use the custom Web Component in your HTML you have to load it first.
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/nutjar-ui"></script>
+<script
+  type="module"
+  src="https://cdn.jsdelivr.net/npm/nutjar-ui@0.3.0"
+></script>
 ```
 
 Then you can add the custom component anywhere in your HTML. Make sure to adjust the elements attributes to your needs
 
 ```html
 <nutjar-button
-  data-npub="npub1mhcr4j594hsrnen594d7700n2t03n8gdx83zhxzculk6sh9nhwlq7uc226"
-  data-relays="wss://nostr.mom,wss://relay.damus.io"
+  npub="npub1mhcr4j594hsrnen594d7700n2t03n8gdx83zhxzculk6sh9nhwlq7uc226"
+  relays="wss://nostr.mom,wss://relay.damus.io"
   mint="https://mint.minibits.cash/Bitcoin"
 ></nutjar-button>
 ```
