@@ -12,12 +12,6 @@ function createModal(jar: Nutjar, theme: "dark" | "light"): HTMLDialogElement {
     theme,
   ) as HTMLDialogElement;
 
-  modalContainer.addEventListener("click", (e) => {
-    if (e.target === modalContainer) {
-      modalContainer.close();
-    }
-  });
-
   const modalInner = createElement("div", { id: "nutjar--modal-inner" }, theme);
   const modalHeading = createElement("h2", { text: "Send a Zap" }, theme);
   const modalInputContainer = createInputContainer(theme);
@@ -30,6 +24,23 @@ function createModal(jar: Nutjar, theme: "dark" | "light"): HTMLDialogElement {
 
   modalInner.append(modalHeading, modalInputContainer, modalInvoiceButton);
   modalContainer.appendChild(modalInner);
+
+  modalContainer.addEventListener("click", (e) => {
+    if (e.target === modalContainer) {
+      modalContainer.close();
+      const invoiceContainer = modalContainer.querySelector(
+        "#nutjar--modal-invoice-container",
+      );
+      if (invoiceContainer) {
+        invoiceContainer.remove();
+        modalInner.append(
+          modalHeading,
+          modalInputContainer,
+          modalInvoiceButton,
+        );
+      }
+    }
+  });
 
   return modalContainer;
 }
